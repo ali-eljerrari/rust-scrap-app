@@ -1,0 +1,13 @@
+services:
+  rust_app: # Name of the service
+    build:
+      context: . # Build context is the current directory
+      dockerfile: Dockerfile # Specify the Dockerfile to use
+    ports:
+      - "3000:3000" # Map port 3000 of the container to port 3000 on the host
+    environment:
+      - WEB_URL=${WEB_URL} # Set the WEB_URL environment variable
+      - RUST_LOG=${RUST_LOG} # Set the RUST_LOG environment variable
+    volumes:
+      - .:/usr/src/app # Mount the current directory to /usr/src/app in the container
+    command: ["cargo", "run", "--release"] # Command to run the application
